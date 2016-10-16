@@ -54,4 +54,17 @@ class FlikzViewController: UIViewController, UITableViewDataSource, UITableViewD
         }
         return cell
     }
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if let cell = sender as? UITableViewCell {
+            if let indexPath = tableView.indexPathForCell(cell) {
+                tableView.deselectRowAtIndexPath(indexPath, animated: true)
+                if let movie = movies?[indexPath.row] {
+                    if let detailViewController = segue.destinationViewController as? DetailViewController {
+                        detailViewController.movie = movie
+                    }
+                }
+            }
+            
+        }
+    }
 }
