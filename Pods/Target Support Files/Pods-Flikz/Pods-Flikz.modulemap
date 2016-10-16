@@ -1,0 +1,6 @@
+framework module Pods_Flikz {
+  umbrella header "Pods-Flikz-umbrella.h"
+
+  export *
+  module * { export * }
+}

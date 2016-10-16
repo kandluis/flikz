@@ -12,6 +12,9 @@
 		101CB99B1DB3E933008A20D6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 101CB99A1DB3E933008A20D6 /* Assets.xcassets */; };
 		101CB99E1DB3E933008A20D6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 101CB99C1DB3E933008A20D6 /* LaunchScreen.storyboard */; };
 		101CB9AA1DB3EA0E008A20D6 /* FlikzViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 101CB9A91DB3EA0E008A20D6 /* FlikzViewController.swift */; };
+		101CB9AC1DB40311008A20D6 /* Movies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 101CB9AB1DB40311008A20D6 /* Movies.swift */; };
+		10B3E3491DB423A100430053 /* FlikCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10B3E3481DB423A100430053 /* FlikCell.swift */; };
+		AD931ECE224F98228D78AAF3 /* Pods_Flikz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CCA471986F1034BB0B5B982D /* Pods_Flikz.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +25,11 @@
 		101CB99D1DB3E933008A20D6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		101CB99F1DB3E933008A20D6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		101CB9A91DB3EA0E008A20D6 /* FlikzViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlikzViewController.swift; sourceTree = "<group>"; };
+		101CB9AB1DB40311008A20D6 /* Movies.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Movies.swift; sourceTree = "<group>"; };
+		10B3E3481DB423A100430053 /* FlikCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlikCell.swift; sourceTree = "<group>"; };
+		9C3A220186B685A8EDA0CE00 /* Pods-Flikz.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Flikz.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Flikz/Pods-Flikz.debug.xcconfig"; sourceTree = "<group>"; };
+		CCA471986F1034BB0B5B982D /* Pods_Flikz.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Flikz.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E67A22D7296A1B25004CC225 /* Pods-Flikz.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Flikz.release.xcconfig"; path = "Pods/Target Support Files/Pods-Flikz/Pods-Flikz.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,6 +37,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AD931ECE224F98228D78AAF3 /* Pods_Flikz.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -40,6 +49,8 @@
 			children = (
 				101CB9921DB3E933008A20D6 /* Flikz */,
 				101CB9911DB3E933008A20D6 /* Products */,
+				E4C345E20AAF2FC6C6321C96 /* Pods */,
+				E70483B736908461EBEAEE71 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -54,7 +65,9 @@
 		101CB9921DB3E933008A20D6 /* Flikz */ = {
 			isa = PBXGroup;
 			children = (
-				101CB9A91DB3EA0E008A20D6 /* FlikzViewController.swift */,
+				10B3E34B1DB4241D00430053 /* Controllers */,
+				10B3E34A1DB423AD00430053 /* Models */,
+				10B3E3471DB4237200430053 /* Views */,
 				101CB9931DB3E933008A20D6 /* AppDelegate.swift */,
 				101CB9971DB3E933008A20D6 /* Main.storyboard */,
 				101CB99A1DB3E933008A20D6 /* Assets.xcassets */,
@@ -64,6 +77,47 @@
 			path = Flikz;
 			sourceTree = "<group>";
 		};
+		10B3E3471DB4237200430053 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				10B3E3481DB423A100430053 /* FlikCell.swift */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		10B3E34A1DB423AD00430053 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				101CB9AB1DB40311008A20D6 /* Movies.swift */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		10B3E34B1DB4241D00430053 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				101CB9A91DB3EA0E008A20D6 /* FlikzViewController.swift */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		E4C345E20AAF2FC6C6321C96 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				9C3A220186B685A8EDA0CE00 /* Pods-Flikz.debug.xcconfig */,
+				E67A22D7296A1B25004CC225 /* Pods-Flikz.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		E70483B736908461EBEAEE71 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				CCA471986F1034BB0B5B982D /* Pods_Flikz.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -71,9 +125,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 101CB9A21DB3E933008A20D6 /* Build configuration list for PBXNativeTarget "Flikz" */;
 			buildPhases = (
+				D5434D839412D02B79C710E4 /* [CP] Check Pods Manifest.lock */,
 				101CB98C1DB3E933008A20D6 /* Sources */,
 				101CB98D1DB3E933008A20D6 /* Frameworks */,
 				101CB98E1DB3E933008A20D6 /* Resources */,
+				15A3399FC923CD11E1136E95 /* [CP] Embed Pods Frameworks */,
+				5211388DECB727C451494612 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -130,6 +187,54 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		15A3399FC923CD11E1136E95 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Flikz/Pods-Flikz-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		5211388DECB727C451494612 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Flikz/Pods-Flikz-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D5434D839412D02B79C710E4 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		101CB98C1DB3E933008A20D6 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -137,6 +242,8 @@
 			files = (
 				101CB9941DB3E933008A20D6 /* AppDelegate.swift in Sources */,
 				101CB9AA1DB3EA0E008A20D6 /* FlikzViewController.swift in Sources */,
+				101CB9AC1DB40311008A20D6 /* Movies.swift in Sources */,
+				10B3E3491DB423A100430053 /* FlikCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -247,6 +354,7 @@
 		};
 		101CB9A31DB3E933008A20D6 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9C3A220186B685A8EDA0CE00 /* Pods-Flikz.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = Flikz/Info.plist;
@@ -258,6 +366,7 @@
 		};
 		101CB9A41DB3E933008A20D6 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E67A22D7296A1B25004CC225 /* Pods-Flikz.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = Flikz/Info.plist;
@@ -286,6 +395,7 @@
 				101CB9A41DB3E933008A20D6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

@@ -10,11 +10,21 @@ import UIKit
 
 class FlikzViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     @IBOutlet weak var tableView: UITableView!
+    
+    var movies: [Movie]?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         tableView.dataSource = self
         tableView.delegate = self
+        
+        Movie.fetchNowPlaying({[unowned self](movies) -> Void in
+            self.movies = movies
+            self.tableView.reloadData()
+        }, error: {(error) -> Void in
+            print("Error occurred retrieving data: \(error)")
+        })
     }
     
     override func didReceiveMemoryWarning() {
@@ -22,12 +32,26 @@ class FlikzViewController: UIViewController, UITableViewDataSource, UITableViewD
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 2
+        if let movies = movies {
+            return movies.count
+        }
+        else {
+            return 0
+        }
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("FlikCell", forIndexPath: indexPath)
-        cell.textLabel?.text = "row \(indexPath.row)"
+        let cell = tableView.dequeueReusableCellWithIdentifier("FlikCell", forIndexPath: indexPath) as! FlikCell
+        if let movie = movies?[indexPath.row] {
+            cell.titleLabel.text = movie.title ?? "No Title"
+            cell.descriptionLabel.text = movie.description ?? "No Description"
+            
+            // TODO: Add placeholder
+            if let smallImageURL = movie.getPosterURL(342) {
+                cell.posterView.setImageWithURL(smallImageURL, placeholderImage: nil)
+            }
+            
+        }
         return cell
     }
 }
