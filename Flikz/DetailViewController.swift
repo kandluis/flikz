@@ -19,11 +19,6 @@ class DetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        let width = scrollView.frame.size.width
-        let height = detailsView.frame.origin.y + scrollView.frame.size.height
-        scrollView.contentSize = CGSize(width: width, height: height)
-        
         if let movie = movie {
             titleLabel.text = movie.title
             detailsLabel.text = movie.description
@@ -37,6 +32,12 @@ class DetailViewController: UIViewController {
             // Load poster
             movie.setPoster(posterBackgroundImage)
         }
+        
+        // Add tab bar navigation.
+        let width = scrollView.frame.size.width
+        let height = detailsView.frame.origin.y + detailsView.frame.size.height + (self.tabBarController?.tabBar.bounds.height ?? 50) + 4
+        scrollView.contentSize = CGSize(width: width, height: height)
+
 
     }
     
