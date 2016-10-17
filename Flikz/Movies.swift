@@ -39,10 +39,10 @@ class Movie {
         }
     }
     
-    class func fetchNowPlaying(successCallback: ([Movie]) -> Void, error: ((NSError?) -> Void)?) {
-        let nowPlayingURL = "https://api.themoviedb.org/3/movie/now_playing"
+    class func fetchEndpoint(endpoint: String, successCallback: ([Movie]) -> Void, error: ((NSError?) -> Void)?) {
+        let url = "https://api.themoviedb.org/3/movie/\(endpoint)"
         let manager = AFHTTPRequestOperationManager()
-        manager.GET(nowPlayingURL, parameters: params, success: { (operation ,responseObject) -> Void in
+        manager.GET(url, parameters: params, success: { (operation ,responseObject) -> Void in
             if let results = responseObject["results"] as? NSArray {
                 var movies: [Movie] = []
                 if let results = results as? [NSDictionary] {

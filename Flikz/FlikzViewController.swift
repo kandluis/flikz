@@ -17,9 +17,15 @@ class FlikzViewController: UIViewController, UITableViewDataSource, UITableViewD
     @IBOutlet weak var errorLabel: UILabel!
     
     var movies: [Movie]?
+    var endpoint: String!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // Change color of navigation controller
+        navigationController?.navigationBar.barTintColor = UIColor.blackColor()
+        navigationController?.navigationBar.tintColor = UIColor.whiteColor()
+        navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
         
         tableView.dataSource = self
         tableView.delegate = self
@@ -81,7 +87,7 @@ class FlikzViewController: UIViewController, UITableViewDataSource, UITableViewD
         
         // Attempt a fetch!
         MBProgressHUD.showHUDAddedTo(self.view, animated: true)
-        Movie.fetchNowPlaying({[unowned self](movies) -> Void in
+        Movie.fetchEndpoint(endpoint, successCallback: {[unowned self](movies) -> Void in
             self.movies = movies
             self.tableView.reloadData()
             refreshControl.endRefreshing()

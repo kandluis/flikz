@@ -16,9 +16,34 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
+        window = UIWindow(frame: UIScreen.mainScreen().bounds)
+        
+        let tabBarController = UITabBarController()
+        guard let nowPlaying = getNavigationControllerFor("now_playing") else {
+            return false
+        }
+        guard let topRated = getNavigationControllerFor("top_rated") else {
+            return false
+        }
+        nowPlaying.tabBarItem.title = "Now Playing"
+        nowPlaying.tabBarItem.image = UIImage(named: "now_playing")
+        topRated.tabBarItem.title = "Top Rated"
+            topRated.tabBarItem.image = UIImage(named:
+                "top_rated")
+        
+        tabBarController.viewControllers = [nowPlaying, topRated]
+        
+        // UITabBar Appearance
+        UITabBar.appearance().tintColor = UIColor.whiteColor()
+        UITabBar.appearance().barTintColor = UIColor.blackColor()
+        UITabBar.appearance().alpha = 0.8
+        
+        window?.rootViewController = tabBarController
+        window?.makeKeyAndVisible()
+        
         return true
     }
-
+    
     func applicationWillResignActive(application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
         // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
@@ -39,6 +64,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationWillTerminate(application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+    }
+    
+    func getNavigationControllerFor(endpoint: String) -> UINavigationController? {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        
+        guard let controller = storyboard.instantiateViewControllerWithIdentifier("FlikzNavigationController") as? UINavigationController else { return  nil }
+        guard let view = controller.topViewController as? FlikzViewController else { return nil }
+        view.endpoint = endpoint
+        
+        return controller
     }
 
 

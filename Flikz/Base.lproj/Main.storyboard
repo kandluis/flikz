@@ -8,7 +8,7 @@
         <!--Movies-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="FlikzViewController" customModule="Flikz" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="FlikzViewController" id="BYZ-38-t0r" customClass="FlikzViewController" customModule="Flikz" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -149,7 +149,7 @@
         <!--Navigation Controller-->
         <scene sceneID="QNc-Kd-B6k">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="7HE-kv-ehG" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="FlikzNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="7HE-kv-ehG" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="974-DI-QIV">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
