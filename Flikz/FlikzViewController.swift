@@ -34,7 +34,13 @@ class FlikzViewController: UIViewController, UITableViewDataSource, UITableViewD
         self.tableView.separatorInset = UIEdgeInsetsZero
         self.tableView.separatorStyle = .None
         
+        // Add background black color
+        self.tableView.backgroundView = nil;
+        self.tableView.backgroundView = UIView()
+        self.tableView.backgroundView?.backgroundColor = UIColor.blackColor()
+        
         let refreshControl = UIRefreshControl()
+        refreshControl.tintColor = UIColor.whiteColor()
         refreshControl.addTarget(self, action: #selector(loadNetworkData(_:)), forControlEvents: UIControlEvents.ValueChanged)
         tableView.insertSubview(refreshControl, atIndex: 0)
         loadNetworkData(refreshControl)
@@ -105,12 +111,12 @@ class FlikzViewController: UIViewController, UITableViewDataSource, UITableViewD
         errorView.alpha = 0
         errorView.hidden = false
         UIView.animateWithDuration(fadeDuration, animations: {[unowned self] in
-            self.errorView.alpha = 0.5
+            self.errorView.alpha = 0.9
         })
         // TODO - Implement image
     }
     func hideError(){
-        self.errorView.alpha = 0.5
+        self.errorView.alpha = 0.9
         UIView.animateWithDuration(fadeDuration, animations: {[unowned self] in
             self.errorView.alpha = 0
         })

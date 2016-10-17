@@ -99,9 +99,7 @@ class Movie {
             view.alpha = 0.0
             view.image = smallImage;
             
-            // We always animate even if small image is cached because it
-            // looks better
-            let duration = 1.0
+            let duration = smallImageResponse == nil ? 0 : 0.5
             
             UIView.animateWithDuration(duration, animations: { () -> Void in
                 

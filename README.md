@@ -32,6 +32,7 @@ The following **additional** features are implemented:
 - [x] Add a placeholder image for slow requests.
 - [x] Change theme to black.
 - [x] Respond intelligently if image is already cached.
+- [x] Autosize content and animate scroll window. 
 
 ## Video Walkthrough
 

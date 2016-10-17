@@ -21,7 +21,7 @@ class DetailViewController: UIViewController {
         super.viewDidLoad()
         
         let width = scrollView.frame.size.width
-        let height = detailsView.frame.height + scrollView.frame.size.height
+        let height = detailsView.frame.origin.y + scrollView.frame.size.height
         scrollView.contentSize = CGSize(width: width, height: height)
         
         if let movie = movie {
@@ -30,8 +30,26 @@ class DetailViewController: UIViewController {
             
             // Fit text size! 
             detailsLabel.sizeToFit()
+            
+            // Fit subview
+            resizeToFitSubvies(detailsView)
+            
+            // Load poster
             movie.setPoster(posterBackgroundImage)
         }
 
+    }
+    
+    func resizeToFitSubvies(view: UIView){
+        var w: CGFloat = 0
+        var h: CGFloat = 0
+        
+        for subview in view.subviews {
+            let fw = subview.frame.origin.x + subview.frame.size.width
+            let fh = subview.frame.origin.y + subview.frame.size.height
+            w = max(fw, w)
+            h = max(fh, h)
+        }
+        view.frame = CGRectMake(view.frame.origin.x, view.frame.origin.y, w, h)
     }
 }
