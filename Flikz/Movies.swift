@@ -88,6 +88,44 @@ class Movie {
         return NSURL(string: urlString)
     }
     
+    func getTrailerURL(success: NSURL -> Void, error: (NSError? -> Void)?) {
+        guard let title = title else {
+            if let error = error {
+                error(NSError(domain: "No movie title", code: 2, userInfo: nil))
+            }
+            return
+        }
+        
+        let params = [
+            "key": "AIzaSyD-6CFEKonGVe9Qa-r384caYjGQH9yyX0k",
+            "part": "id",
+            "maxResults": "1",
+            "q": "\(title) trailer"
+        ]
+        let youtubeSearchURL = "https://www.googleapis.com/youtube/v3/search"
+        let youtubeWatchURL = "https://www.youtube.com/watch"
+        
+        let manager = AFHTTPRequestOperationManager()
+        manager.GET(youtubeSearchURL, parameters: params, success: { (operation, responseObject) -> Void in
+            if let results = responseObject["items"] as? [NSDictionary] {
+                if let id = results[0]["id"] as? NSDictionary {
+                    if let videoId = id["videoId"] {
+                        if let url = NSURL(string: "\(youtubeWatchURL)?v=\(videoId)") {
+                           success(url)
+                        }
+                    }
+                }
+            }
+            if let error = error {
+                error(NSError(domain: "Failed to retrieve trailer", code: 3, userInfo: nil))
+            }
+        }, failure: { (operation, err) -> Void in
+            if let error = error {
+                error(err)
+            }
+        })
+    }
+    
     // Sets image first to preview (assumed small), then asset (assumed large)
     // for the given view.
     private func setImage(preview: NSURLRequest, asset: NSURLRequest, view: UIImageView) -> Void {

@@ -32,7 +32,8 @@ The following **additional** features are implemented:
 - [x] Add a placeholder image for slow requests.
 - [x] Change theme to black.
 - [x] Respond intelligently if image is already cached.
-- [x] Autosize content and animate scroll window. 
+- [x] Autosize content and animate scroll window.
+- [x] Link to YouTube Trailer for the film is now displayed. 
 
 ## Video Walkthrough
 

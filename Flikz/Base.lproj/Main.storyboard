@@ -131,6 +131,15 @@
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     </view>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="b8D-WI-OnP">
+                                        <rect key="frame" x="240" y="364" width="45" height="42"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
+                                        <state key="normal" image="trailer"/>
+                                        <connections>
+                                            <action selector="tappedTrailer:" destination="cKc-qN-ICP" eventType="touchUpInside" id="XpR-3i-tCd"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                             </scrollView>
                         </subviews>
@@ -170,5 +179,6 @@
     </scenes>
     <resources>
         <image name="alert" width="32" height="32"/>
+        <image name="trailer" width="240" height="240"/>
     </resources>
 </document>

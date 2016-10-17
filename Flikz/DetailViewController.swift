@@ -41,6 +41,16 @@ class DetailViewController: UIViewController {
 
     }
     
+    @IBAction func tappedTrailer(sender: UIButton) {
+        if let movie = movie {
+            movie.getTrailerURL({(url) -> Void in
+                print(url)
+                UIApplication.sharedApplication().openURL(url)
+            }, error: nil)
+        }
+    }
+    
+    
     func resizeToFitSubvies(view: UIView){
         var w: CGFloat = 0
         var h: CGFloat = 0
