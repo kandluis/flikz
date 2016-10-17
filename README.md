@@ -40,7 +40,7 @@ GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
 ## Notes
 
-Describe any challenges encountered while building the app.
+The most challanging aspect really boils down to the finishing touches. Getting the right colors, formatting, layout, etc. is incredibly difficult. I can only imagine how helpful AutoLayout will be.
 
 ## License
 
