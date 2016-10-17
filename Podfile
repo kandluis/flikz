@@ -4,7 +4,9 @@
 target 'Flikz' do
   # Comment this line if you're not using Swift and don't want to use dynamic frameworks
   use_frameworks!
+  inhibit_all_warnings!
 
   # Pods for Flikz
   pod 'AFNetworking', '~> 2.6'
+  pod 'MBProgressHUD', '~>1.0.0'
 end

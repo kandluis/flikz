@@ -7,9 +7,14 @@
 //
 
 import UIKit
+import MBProgressHUD
+
+private let fadeDuration: Double = 2
 
 class FlikzViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var errorView: UIView!
+    @IBOutlet weak var errorLabel: UILabel!
     
     var movies: [Movie]?
     
@@ -19,12 +24,14 @@ class FlikzViewController: UIViewController, UITableViewDataSource, UITableViewD
         tableView.dataSource = self
         tableView.delegate = self
         
-        Movie.fetchNowPlaying({[unowned self](movies) -> Void in
-            self.movies = movies
-            self.tableView.reloadData()
-        }, error: {(error) -> Void in
-            print("Error occurred retrieving data: \(error)")
-        })
+        // Disable seperator
+        self.tableView.separatorInset = UIEdgeInsetsZero
+        self.tableView.separatorStyle = .None
+        
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(loadNetworkData(_:)), forControlEvents: UIControlEvents.ValueChanged)
+        tableView.insertSubview(refreshControl, atIndex: 0)
+        loadNetworkData(refreshControl)
     }
     
     override func didReceiveMemoryWarning() {
@@ -66,5 +73,44 @@ class FlikzViewController: UIViewController, UITableViewDataSource, UITableViewD
             }
             
         }
+    }
+    
+    func loadNetworkData(refreshControl: UIRefreshControl){
+        // Clear error
+        errorView.hidden = true
+        
+        // Attempt a fetch!
+        MBProgressHUD.showHUDAddedTo(self.view, animated: true)
+        Movie.fetchNowPlaying({[unowned self](movies) -> Void in
+            self.movies = movies
+            self.tableView.reloadData()
+            refreshControl.endRefreshing()
+            MBProgressHUD.hideHUDForView(self.view, animated: true)
+            }, error: {[unowned self] (error) -> Void in
+                // TODO: Add image
+                self.showError("Network Error", errorImg: nil)
+                self.tableView.reloadData()
+                refreshControl.endRefreshing()
+                MBProgressHUD.hideHUDForView(self.view, animated: true)
+            })
+    }
+    
+    func showError(errorText: String, errorImg: UIImage?){
+        errorLabel.text = errorText
+        
+        // Animate
+        errorView.alpha = 0
+        errorView.hidden = false
+        UIView.animateWithDuration(fadeDuration, animations: {[unowned self] in
+            self.errorView.alpha = 0.5
+        })
+        // TODO - Implement image
+    }
+    func hideError(){
+        self.errorView.alpha = 0.5
+        UIView.animateWithDuration(fadeDuration, animations: {[unowned self] in
+            self.errorView.alpha = 0
+        })
+        errorView.hidden = true
     }
 }
