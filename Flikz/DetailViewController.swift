@@ -30,9 +30,7 @@ class DetailViewController: UIViewController {
             
             // Fit text size! 
             detailsLabel.sizeToFit()
-            if let posterURL = movie.getOriginalPosterURL() {
-                posterBackgroundImage.setImageWithURL(posterURL)
-            }
+            movie.setPoster(posterBackgroundImage)
         }
 
     }

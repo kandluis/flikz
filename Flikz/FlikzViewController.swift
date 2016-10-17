@@ -58,12 +58,9 @@ class FlikzViewController: UIViewController, UITableViewDataSource, UITableViewD
         if let movie = movies?[indexPath.row] {
             cell.titleLabel.text = movie.title ?? "No Title"
             cell.descriptionLabel.text = movie.description ?? "No Description"
+            cell.selectionStyle = .None
             
-            // TODO: Add placeholder
-            if let smallImageURL = movie.getPosterURL(342) {
-                cell.posterView.setImageWithURL(smallImageURL, placeholderImage: nil)
-            }
-            
+            movie.setPosterThumbail(cell.posterView)
         }
         return cell
     }

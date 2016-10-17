@@ -64,6 +64,18 @@ class Movie {
         })
     }
     
+    func setPosterThumbail(view: UIImageView) -> Void {
+        guard let smallImageURL = getPosterURL(45) else { return }
+        guard let largeImageURL = getPosterURL(342) else { return }
+        setImage(NSURLRequest(URL: smallImageURL), asset: NSURLRequest(URL: largeImageURL), view: view)
+    }
+    
+    func setPoster(view: UIImageView) -> Void {
+        guard let smallImageURL = getPosterURL(342) else { return }
+        guard let largeImageURL = getOriginalPosterURL() else { return }
+        setImage(NSURLRequest(URL: smallImageURL), asset: NSURLRequest(URL: largeImageURL), view: view)
+    }
+    
     func getOriginalPosterURL() -> NSURL? {
         guard let poster = posterPath else { return nil }
         let urlString = "\(baseURL)/original/\(poster)"
@@ -74,5 +86,57 @@ class Movie {
         guard let poster = posterPath else { return nil }
         let urlString = "\(baseURL)/w\(size)/\(poster)"
         return NSURL(string: urlString)
+    }
+    
+    // Sets image first to preview (assumed small), then asset (assumed large)
+    // for the given view.
+    private func setImage(preview: NSURLRequest, asset: NSURLRequest, view: UIImageView) -> Void {
+        let placeholder = UIImage(named: "placeholder")
+        view.setImageWithURLRequest(preview, placeholderImage: placeholder, success: { (smallImageRequest, smallImageResponse, smallImage) -> Void in
+            
+            // smallImageResponse will be nil if the smallImage is already available
+            // in cache (might want to do something smarter in that case).
+            view.alpha = 0.0
+            view.image = smallImage;
+            
+            // We always animate even if small image is cached because it
+            // looks better
+            let duration = 1.0
+            
+            UIView.animateWithDuration(duration, animations: { () -> Void in
+                
+                view.alpha = 1.0
+                
+                }, completion: { (sucess) -> Void in
+                    
+                    // The AFNetworking ImageView Category only allows one request to be sent at a time
+                    // per ImageView. This code must be in the completion block.
+                    view.setImageWithURLRequest(
+                        asset,
+                        placeholderImage: smallImage,
+                        success: { (largeImageRequest, largeImageResponse, largeImage) -> Void in
+                            view.image = largeImage
+                        },
+                        failure: { (request, response, error) -> Void in
+                            print("Error loading large image \(error)")
+                            // Set small image!
+                            view.image = smallImage
+                    })
+            })
+            }, failure: { (request, response, error) -> Void in
+                // Try to get the large image
+                view.setImageWithURLRequest(
+                    asset,
+                    placeholderImage: placeholder,
+                    success: { (largeImageRequest, largeImageResponse, largeImage) -> Void in
+                        view.image = largeImage
+                    },
+                    // Failed at large and small
+                    failure: { (request, response, error) -> Void in
+                        print("Error loading both images \(error)")
+                        // Set placeholder image!
+                        view.image = placeholder
+                })
+        })
     }
 }

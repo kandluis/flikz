@@ -91,7 +91,7 @@
             </objects>
             <point key="canvasLocation" x="672" y="382"/>
         </scene>
-        <!--Details-->
+        <!--Movie Details-->
         <scene sceneID="cmX-77-phL">
             <objects>
                 <viewController id="cKc-qN-ICP" customClass="DetailViewController" customModule="Flikz" customModuleProvider="target" sceneMemberID="viewController">
@@ -133,7 +133,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Details" id="WOC-CN-kOt"/>
+                    <navigationItem key="navigationItem" title="Movie Details" id="WOC-CN-kOt"/>
                     <connections>
                         <outlet property="detailsLabel" destination="PJE-zz-RLl" id="0ne-9w-krz"/>
                         <outlet property="detailsView" destination="ovi-I9-qNu" id="FpH-Uj-Mos"/>

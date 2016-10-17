@@ -19,9 +19,9 @@ The following **optional** features are implemented:
 - [x] Add a tab bar for **Now Playing** and **Top Rated** movies.
 - [ ] Implement segmented control to switch between list view and grid view.
 - [ ] Add a search bar.
-- [ ] All images fade in.
-- [ ] For the large poster, load the low-res image first, switch to high-res when complete.
-- [ ] Customize the highlight and selection effect of the cell.
+- [x] All images fade in.
+- [x] For the large poster, load the low-res image first, switch to high-res when complete.
+- [x] Customize the highlight and selection effect of the cell.
 - [x] Customize the navigation bar.
 
 The following **additional** features are implemented:
@@ -29,6 +29,9 @@ The following **additional** features are implemented:
 - [x] Add Movie model class for parsing retrieved network data.
 - [x] Improve UI by creating black background.
 - [x] Improve UI by animating network errors.
+- [x] Add a placeholder image for slow requests.
+- [x] Change theme to black.
+- [x] Respond intelligently if image is already cached.
 
 ## Video Walkthrough
 
