@@ -23,26 +23,26 @@ class FlikzViewController: UIViewController, UITableViewDataSource, UITableViewD
         super.viewDidLoad()
         
         // Change color of navigation controller
-        navigationController?.navigationBar.barTintColor = UIColor.blackColor()
-        navigationController?.navigationBar.tintColor = UIColor.whiteColor()
-        navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
+        navigationController?.navigationBar.barTintColor = UIColor.black
+        navigationController?.navigationBar.tintColor = UIColor.white
+        navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white]
         
         tableView.dataSource = self
         tableView.delegate = self
         
         // Disable seperator
-        self.tableView.separatorInset = UIEdgeInsetsZero
-        self.tableView.separatorStyle = .None
+        self.tableView.separatorInset = UIEdgeInsets.zero
+        self.tableView.separatorStyle = .none
         
         // Add background black color
         self.tableView.backgroundView = nil;
         self.tableView.backgroundView = UIView()
-        self.tableView.backgroundView?.backgroundColor = UIColor.blackColor()
+        self.tableView.backgroundView?.backgroundColor = UIColor.black
         
         let refreshControl = UIRefreshControl()
-        refreshControl.tintColor = UIColor.whiteColor()
-        refreshControl.addTarget(self, action: #selector(loadNetworkData(_:)), forControlEvents: UIControlEvents.ValueChanged)
-        tableView.insertSubview(refreshControl, atIndex: 0)
+        refreshControl.tintColor = UIColor.white
+        refreshControl.addTarget(self, action: #selector(loadNetworkData(_:)), for: UIControlEvents.valueChanged)
+        tableView.insertSubview(refreshControl, at: 0)
         loadNetworkData(refreshControl)
     }
     
@@ -50,7 +50,7 @@ class FlikzViewController: UIViewController, UITableViewDataSource, UITableViewD
         super.didReceiveMemoryWarning()
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if let movies = movies {
             return movies.count
         }
@@ -59,23 +59,23 @@ class FlikzViewController: UIViewController, UITableViewDataSource, UITableViewD
         }
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("FlikCell", forIndexPath: indexPath) as! FlikCell
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "FlikCell", for: indexPath) as! FlikCell
         if let movie = movies?[indexPath.row] {
             cell.titleLabel.text = movie.title ?? "No Title"
             cell.descriptionLabel.text = movie.description ?? "No Description"
-            cell.selectionStyle = .None
+            cell.selectionStyle = .none
             
             movie.setPosterThumbail(cell.posterView)
         }
         return cell
     }
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let cell = sender as? UITableViewCell {
-            if let indexPath = tableView.indexPathForCell(cell) {
-                tableView.deselectRowAtIndexPath(indexPath, animated: true)
+            if let indexPath = tableView.indexPath(for: cell) {
+                tableView.deselectRow(at: indexPath, animated: true)
                 if let movie = movies?[indexPath.row] {
-                    if let detailViewController = segue.destinationViewController as? DetailViewController {
+                    if let detailViewController = segue.destination as? DetailViewController {
                         detailViewController.movie = movie
                     }
                 }
@@ -84,42 +84,42 @@ class FlikzViewController: UIViewController, UITableViewDataSource, UITableViewD
         }
     }
     
-    func loadNetworkData(refreshControl: UIRefreshControl){
+    func loadNetworkData(_ refreshControl: UIRefreshControl){
         // Clear error
-        errorView.hidden = true
+        errorView.isHidden = true
         
         // Attempt a fetch!
-        MBProgressHUD.showHUDAddedTo(self.view, animated: true)
+        MBProgressHUD.showAdded(to: self.view, animated: true)
         Movie.fetchEndpoint(endpoint, successCallback: {[unowned self](movies) -> Void in
             self.movies = movies
             self.tableView.reloadData()
             refreshControl.endRefreshing()
-            MBProgressHUD.hideHUDForView(self.view, animated: true)
+            MBProgressHUD.hide(for: self.view, animated: true)
             }, error: {[unowned self] (error) -> Void in
                 // TODO: Add image
                 self.showError("Network Error", errorImg: nil)
                 self.tableView.reloadData()
                 refreshControl.endRefreshing()
-                MBProgressHUD.hideHUDForView(self.view, animated: true)
+                MBProgressHUD.hide(for: self.view, animated: true)
             })
     }
     
-    func showError(errorText: String, errorImg: UIImage?){
+    func showError(_ errorText: String, errorImg: UIImage?){
         errorLabel.text = errorText
         
         // Animate
         errorView.alpha = 0
-        errorView.hidden = false
-        UIView.animateWithDuration(fadeDuration, animations: {[unowned self] in
+        errorView.isHidden = false
+        UIView.animate(withDuration: fadeDuration, animations: {[unowned self] in
             self.errorView.alpha = 0.9
         })
         // TODO - Implement image
     }
     func hideError(){
         self.errorView.alpha = 0.9
-        UIView.animateWithDuration(fadeDuration, animations: {[unowned self] in
+        UIView.animate(withDuration: fadeDuration, animations: {[unowned self] in
             self.errorView.alpha = 0
         })
-        errorView.hidden = true
+        errorView.isHidden = true
     }
 }

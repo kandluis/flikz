@@ -41,17 +41,17 @@ class DetailViewController: UIViewController {
 
     }
     
-    @IBAction func tappedTrailer(sender: UIButton) {
+    @IBAction func tappedTrailer(_ sender: UIButton) {
         if let movie = movie {
             movie.getTrailerURL({(url) -> Void in
                 print(url)
-                UIApplication.sharedApplication().openURL(url)
+                UIApplication.shared.openURL(url)
             }, error: nil)
         }
     }
     
     
-    func resizeToFitSubvies(view: UIView){
+    func resizeToFitSubvies(_ view: UIView){
         var w: CGFloat = 0
         var h: CGFloat = 0
         
@@ -61,6 +61,6 @@ class DetailViewController: UIViewController {
             w = max(fw, w)
             h = max(fh, h)
         }
-        view.frame = CGRectMake(view.frame.origin.x, view.frame.origin.y, w, h)
+        view.frame = CGRect(x: view.frame.origin.x, y: view.frame.origin.y, width: w, height: h)
     }
 }
